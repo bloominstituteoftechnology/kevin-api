@@ -38,4 +38,4 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-test_chain = prompt | ChatOpenAI(model="gpt-4o", temperature= 0.7)
+generate_chain = prompt | ChatOpenAI(model="gpt-4o", temperature= 0.7)
