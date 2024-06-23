@@ -3,7 +3,8 @@ from langchain_openai import ChatOpenAI
 
 SYSTEM_PROMPT="""
 
-Generate unit tests for the given Python code. Based on the tests created, highlight any possible errors in the code. 
+Generate unit tests for the given Python code. 
+Based on the tests created, highlight any possible errors in the code. 
 
 Input: Python code.
 Output: A numbered list of errors to fix. If there are no errors and the code should work, return "none".
