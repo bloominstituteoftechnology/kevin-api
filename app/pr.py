@@ -16,4 +16,4 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-pr_chain = prompt | ChatOpenAI(model="gpt-4o", temperature= 0.8)
+pr_chain = prompt | ChatOpenAI(model="gpt-3.5-turbo", temperature= 0.8)
