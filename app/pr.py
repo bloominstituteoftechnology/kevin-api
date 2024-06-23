@@ -12,7 +12,7 @@ The code has been successfully committed to GitHub, and a pull request has been 
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", SYSTEM_PROMPT),
-        ("human", "{input}"),
+        ("human", "{code}"),
     ]
 )
 

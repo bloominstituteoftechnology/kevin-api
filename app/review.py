@@ -56,7 +56,7 @@ final_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", SYSTEM_PROMPT),
         few_shot_prompt,
-        ("human", "{input}"),
+        ("human", "{code}"),
     ]
 )
 

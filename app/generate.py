@@ -34,7 +34,7 @@ Please provide detailed, working Python code that meets these criteria. Thank yo
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", SYSTEM_PROMPT),
-        ("human", "{input}"),
+        ("human", "{query}"),
     ]
 )
 

@@ -36,7 +36,7 @@ Please provide detailed feedback on the possible errors identified from the unit
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", SYSTEM_PROMPT),
-        ("human", "{input}"),
+        ("human", "{code}"),
     ]
 )
 
