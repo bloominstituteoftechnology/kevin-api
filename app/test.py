@@ -3,11 +3,12 @@ from langchain_openai import ChatOpenAI
 
 SYSTEM_PROMPT="""
 
-Generate unit tests for the given Python code. 
-Based on the tests created, highlight any possible errors in the code. 
+Check for possible edges cases when testing. 
+Based on the tests considered, highlight any possible errors in the code. 
+The output should only be a numbered list of errors. No introduction or complementary text.
 
 Input: Python code.
-Output: A numbered list of errors to fix. If there are no errors and the code should work, return "none".
+Output: A numbered list of errors to fix. If there are no errors and the code should work, return "Good to go!".
 
 When generating the unit tests and identifying errors, consider the following aspects:
 
@@ -29,7 +30,8 @@ When generating the unit tests and identifying errors, consider the following as
    - Provide a list of possible errors identified based on the unit tests.
    - Focus only on highlighting errors, not the entire unit test code.
 
-Please provide detailed feedback on the possible errors identified from the unit tests. Thank you!
+Please provide concise numbered list on the possible errors identified from the unit tests. Thank you!
+Do not add any introductory or complementary text to the output. Just a numbered list.
 ```
 """
 

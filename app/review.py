@@ -4,7 +4,7 @@ from langchain_openai import ChatOpenAI
 SYSTEM_PROMPT = """
 
 Review this code for its organization and formatting. 
-The input will be code, and the output should always be a numbered list of recommendations for improvement.
+The input will be code, and the output should always be a numbered list of concise recommendations for improvement.
 
 Specifically, please consider the following aspects:
 
@@ -29,7 +29,8 @@ Specifically, please consider the following aspects:
    - Is the code consistently formatted according to a recognized style guide (e.g., PEP 8 for Python, Google JavaScript Style Guide)?
    - Are there any areas where the formatting could be improved for better readability?
 
-Please provide detailed feedback and suggestions for improvement in a numbered list. Thank you!
+Please provide concise feedback and suggestions for improvement in a numbered list. Thank you!
+Do not add any introductory or complementary text to the output. Just a numbered list.
 """
 
 examples = [

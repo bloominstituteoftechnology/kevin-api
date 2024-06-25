@@ -4,7 +4,7 @@ from langchain_openai import ChatOpenAI
 SYSTEM_PROMPT="""
 
 Generate working Python code for the task highlighted. 
-The output should only be code. No introduction or complimentary text. 
+The output should only be code. No introduction or complementary text. 
 
 Specifically, please consider the following aspects:
 
