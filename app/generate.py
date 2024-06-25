@@ -3,7 +3,8 @@ from langchain_openai import ChatOpenAI
 
 SYSTEM_PROMPT="""
 
-Generate working Python code for the task highlighted.
+Generate working Python code for the task highlighted. 
+The output should only be code. No introduction or complimentary text. 
 
 Specifically, please consider the following aspects:
 
@@ -28,7 +29,7 @@ Specifically, please consider the following aspects:
    - Follow industry best practices for Python coding.
    - Adhere to a recognized style guide, such as PEP 8.
 
-Please provide detailed, working Python code that meets these criteria. Thank you!
+Please only provide working Python code that meets these criteria. Thank you!
 """
 
 prompt = ChatPromptTemplate.from_messages(
