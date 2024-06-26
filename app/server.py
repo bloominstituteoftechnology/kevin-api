@@ -2,10 +2,10 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from langserve import add_routes
-from app.pr import pr_chain
-from app.test import test_chain
-from app.review import review_chain
-from app.generate import generate_chain
+from app.agents.pr import pr_chain
+from app.agents.test import test_chain
+from app.agents.review import review_chain
+from app.agents.generate import generate_chain
 
 app = FastAPI()
 
