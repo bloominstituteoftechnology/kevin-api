@@ -8,9 +8,12 @@ from app.agents.pr import pr_chain
 from app.agents.test import test_chain
 from app.agents.review import review_chain
 from app.agents.generate import generate_chain
-from app.utils.vectorize import vectorize_codebase 
-from app.utils.vectorize import load_environment_variables, initialize_pinecone_client
+from app.utils.vectorize import vectorize_codebase
 from github import GithubException
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
 
@@ -48,26 +51,21 @@ class VectorizeRequest(BaseModel):
 @app.post("/vectorize")
 async def vectorize(req: VectorizeRequest):
     try:
-        # Load environment variables
-        load_environment_variables()
+        logging.info(f"Received request: {req.json()}")
         
-        # Initialize Pinecone client
-        pc = initialize_pinecone_client()
-
-        # Check if index already exists
-        if req.name in pc.list_indexes():
-            return {"message": "Index already exists"}, 200
-
         # Call the vectorize_codebase function
         result = vectorize_codebase(req.dict())
-        return {"message": "Vectorization completed successfully"}, 200
-
+        return {"message": "Vectorization completed successfully" if result else "Index already exists"}, 200
+    except ValidationError as e:
+        logging.error(f"Validation error: {e.json()}")
+        raise HTTPException(status_code=422, detail=e.errors())
     except GithubException as e:
+        logging.error(f"GitHub error: {e.data['message']}")
         raise HTTPException(status_code=400, detail=f"GitHub error: {e.data['message']}")
     except Exception as e:
+        logging.error(f"Unexpected error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(app, host="0.0.0.0", port=8000)
