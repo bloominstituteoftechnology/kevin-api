@@ -10,6 +10,7 @@ from app.agents.review import review_chain
 from app.agents.generate import generate_chain
 from app.utils.vectorize import vectorize_codebase 
 from app.utils.vectorize import load_environment_variables, initialize_pinecone_client
+from github import GithubException
 
 app = FastAPI()
 
