@@ -1,5 +1,11 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+os.environ['OPENAI_API_KEY'] = os.environ.get('OPENAI_API_KEY')
 
 SYSTEM_PROMPT="""
 
