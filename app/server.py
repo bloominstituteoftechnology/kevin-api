@@ -9,6 +9,7 @@ from app.agents.test import test_chain
 from app.agents.review import review_chain
 from app.agents.generate import generate_chain
 from app.utils.vectorize import vectorize_codebase
+from app.utils.docker_run import run_python_code_in_docker
 from github import GithubException
 import logging
 
@@ -40,6 +41,20 @@ add_routes(app, pr_chain, enable_feedback_endpoint=True, path="/pr")
 add_routes(app, test_chain, enable_feedback_endpoint=True, path="/test")
 add_routes(app, review_chain, enable_feedback_endpoint=True, path="/review")
 add_routes(app, generate_chain, enable_feedback_endpoint=True, path="/generate")
+
+class CodeRequest(BaseModel):
+    input: dict
+    config: dict
+    kwargs: dict
+
+@app.post("/docker-run")
+async def run_code(request: CodeRequest):
+    try:
+        code = request.input.get("code")
+        result = run_python_code_in_docker(code)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Define the Pydantic model for the request body
 class VectorizeRequest(BaseModel):
