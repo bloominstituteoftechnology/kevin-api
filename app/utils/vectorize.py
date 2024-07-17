@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from pinecone import Pinecone, ServerlessSpec
 from github import Github, GithubException
 from app.utils.github_repo import GitHubRepo
+from app.utils.database import Database
 from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_pinecone import PineconeVectorStore
@@ -69,8 +70,21 @@ def vectorize_codebase(req):
         documents = text_splitter.split_text(ghr.get_file_content(file))
 
         # Choose the embedding model and vector store 
-        embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")  # Adjust model name if needed
+        embeddings = OpenAIEmbeddings(model="text-embedding-3-small")  # Adjust model name if needed
         PineconeVectorStore.from_texts(texts=documents, embedding=embeddings, index_name=req["name"])
+    
+    # Save record to MongoDB
+    db = Database('projects')
+    record = {
+        "name": req["name"],
+        "github_url": req["github_url"],
+        "owner": owner,
+        "repo_name": repo_name,
+        "id": req["auth0_id"],
+        "files_processed": len(files)
+    }
+    print(record)
+    db.write_one(record)
 
-    return {"message": "Vectorization completed"}
+    return {"message": "Vectorization completed and record saved to the database"}
 

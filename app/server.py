@@ -61,6 +61,10 @@ class VectorizeRequest(BaseModel):
     name: str
     github_url: str
     branch: str
+    auth0_id: str
+    email: str
+    first_name: str
+    last_name: str
 
 # Endpoint to vectorize codebase
 @app.post("/vectorize")
